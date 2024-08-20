@@ -55,7 +55,7 @@ const SubHeader = () => {
       const response = await axios.post("https://compiler-n0js.onrender.com/compiler/save", {
         code: code,
       });
-      console.log(response)
+      
       navigate(`/compiler/${response.data.url}`, { replace: true });
       toast("Code has been saved!!")
     } catch (err) {

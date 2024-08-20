@@ -17,8 +17,10 @@ export const saveCode = async (req: Request, res: Response) => {
 
 export const loadCode = async (req:Request, res:Response) => {
     const {id} = req.body;
+
    try{
        const existingCode = await Code.findById(id);
+      
        if(!existingCode){
         return res.status(404).send({ message: "Code not found"})
        }

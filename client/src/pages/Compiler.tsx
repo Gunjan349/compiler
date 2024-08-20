@@ -24,7 +24,7 @@ const Compiler = () => {
 
   const getCode = async () => {
     try {
-      const response = await axios.post("https://compiler-n0js.onrender.com/load", {
+      const response = await axios.post("https://compiler-n0js.onrender.com/compiler/load", {
         id,
       });
       dispatch(updateCodeBody(response.data.code));
