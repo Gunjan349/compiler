@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import {config} from 'dotenv';
 import {dbConnection} from './lib/dbConnection'
@@ -11,7 +11,9 @@ config();
 
 dbConnection();
 
-app.use('/', () => {"hello"})
+app.use('/', (req:Request, res:Response) => {
+    res.send("Hello")
+})
 app.use('/compiler', compilerRouter)
 
 app.listen(4000, () => {

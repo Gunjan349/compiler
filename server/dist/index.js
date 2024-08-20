@@ -13,8 +13,8 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 (0, dotenv_1.config)();
 (0, dbConnection_1.dbConnection)();
-app.use('/', () => {
-    "hello";
+app.use('/', (req, res) => {
+    res.send("Hello");
 });
 app.use('/compiler', compilerRoutes_1.compilerRouter);
 app.listen(4000, () => {
