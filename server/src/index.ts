@@ -11,6 +11,7 @@ config();
 
 dbConnection();
 
+app.use('/', () => {"hello"})
 app.use('/compiler', compilerRouter)
 
 app.listen(4000, () => {
