@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useMediaQuery } from "react-responsive";
+import API_URL from "@/constants";
 
 const Compiler = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Compiler = () => {
 
   const getCode = async () => {
     try {
-      const response = await axios.post("http://localhost:4000/compiler/load", {
+      const response = await axios.post(API_URL + "/compiler/load", {
         id,
       });
       dispatch(updateCodeBody(response.data.code));
