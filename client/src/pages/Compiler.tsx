@@ -1,5 +1,5 @@
 import CodeCompiler from "@/components/CodeCompiler";
-import CodeEdior from "@/components/CodeEdior";
+import CodeEditor from "@/components/CodeEditor";
 import SubHeader from "@/components/SubHeader";
 
 import {
@@ -14,46 +14,54 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useMediaQuery } from "react-responsive";
 
 const Compiler = () => {
-
   const dispatch = useDispatch();
-  const {id} = useParams();
+  const { id } = useParams();
+
+  const isSmallScreen = useMediaQuery({ query: "(max-width:768px)" });
 
   const getCode = async () => {
-    try{
-       const response = await axios.post("http://localhost:4000/compiler/load", {id})
-       dispatch(updateCodeBody(response.data.code))
-    }
-    catch(error){
-      if(axios?.isAxiosError(error)){
-        if(error.response?.status === 500){
-          toast("Invalid URL. Default code loaded!!")
+    try {
+      const response = await axios.post("http://localhost:4000/compiler/load", {
+        id,
+      });
+      dispatch(updateCodeBody(response.data.code));
+    } catch (error) {
+      if (axios?.isAxiosError(error)) {
+        if (error.response?.status === 500) {
+          toast("Invalid URL. Default code loaded!!");
         }
         throw error;
       }
-      handleError(error)
+      handleError(error);
     }
-  }
+  };
   useEffect(() => {
-    if(id){
-       getCode();
+    if (id) {
+      getCode();
     }
-  },[id])
+  }, [id]);
   return (
-    <ResizablePanelGroup direction="horizontal">
+    <ResizablePanelGroup
+      direction={isSmallScreen ? "vertical" : "horizontal"}
+      className={`${
+        isSmallScreen ? "min-h-[calc(100dvh-64px)] max-w-100px" : ""
+      }`}
+    >
       <ResizablePanel
-        className="h-[calc(100dvh-64px)] min-w-[350px]"
-        defaultSize={50}
+        className={`${
+          isSmallScreen ? "max-h-20px" : "h-[calc(100dvh-64px)] min-w-[350px]"
+        } `}
       >
         <SubHeader />
-        <CodeEdior />
+        <CodeEditor />
       </ResizablePanel>
       <ResizableHandle />
-      <ResizablePanel
-        className="h-[calc(100dvh-64px)] min-w-[350px]"
-        defaultSize={50}
-      >
+      <ResizablePanel  className={`${
+          isSmallScreen ? "max-h-20px" : "h-[calc(100dvh-64px)] min-w-[350px]"
+        } `}>
         <CodeCompiler />
       </ResizablePanel>
     </ResizablePanelGroup>

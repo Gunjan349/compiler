@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { updateCode } from "@/redux/slices/compilerSlice";
 
-const CodeEdior = () => {
+const CodeEditor = () => {
   const currentLanguage = useSelector(
     (state: RootState) => state.compilerSlice.selectedLanguage
   );
@@ -35,4 +35,4 @@ const CodeEdior = () => {
   );
 };
 
-export default CodeEdior;
+export default CodeEditor;
