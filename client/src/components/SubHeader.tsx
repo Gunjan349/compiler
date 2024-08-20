@@ -29,7 +29,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import API_URL from "@/constants";
 
 const SubHeader = () => {
   const navigate = useNavigate();
@@ -53,9 +52,10 @@ const SubHeader = () => {
   const handleSaveCode = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(API_URL + "/compiler/save", {
+      const response = await axios.post("https://compiler-n0js.onrender.com/compiler/save", {
         code: code,
       });
+      console.log(response)
       navigate(`/compiler/${response.data.url}`, { replace: true });
       toast("Code has been saved!!")
     } catch (err) {

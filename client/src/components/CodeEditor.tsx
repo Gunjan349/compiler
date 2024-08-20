@@ -15,8 +15,6 @@ const CodeEditor = () => {
   );
   const dispatch = useDispatch();
   const onChange = React.useCallback((value: string) => {
-    // console.log("val:", val);
-    // setValue(val);
     dispatch(updateCode(value))
   }, []);
   return (
